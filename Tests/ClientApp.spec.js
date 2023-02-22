@@ -2,7 +2,7 @@ const { test, expect } = require("@playwright/test");
 const { POManager } = require("../Pages/POManager");
 
 test("Client App Login", async ({ page }) => {
-  await page.pause();
+  //await page.pause();
   const username = "hemraj.shahi90@gmail.com";
   const password = "Testing123";
   const poManager = new POManager(page);
@@ -23,6 +23,7 @@ test("Client App Login", async ({ page }) => {
   /**start of cart page */
   console.log(await page.title());
   const cart_page = poManager.getCartPage();
+  cart_page.VerifyProductIsDisplayed(product_name);
   await cart_page.clickOnCheckOutBtn();
   /**start of Place Order page */
   const placeOrder_page = poManager.getPlaceOrderPage();

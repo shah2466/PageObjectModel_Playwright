@@ -7,8 +7,9 @@ class DashboardPage {
   }
 
   /**
-   *
-   * Search and add the product to the cart
+   *Search and add the product to the cart.
+   *note: If you have a list of identical elements, and the only way to distinguish between them is the order, you can choose a specific element from a list with locator.first(), locator.last() or locator.nth().
+   *  locator.nth() returns locator to the n-th matching element. It's zero based, nth(0) selects the first element.
    */
   async searchProductAddToCart(productName) {
     const titles = await this.productText.allTextContents();
