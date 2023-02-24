@@ -19,6 +19,12 @@ class DashboardPage {
       if (
         (await this.products.nth(i).locator("b").textContent()) === productName
       ) {
+        console.log(
+          `Adding this item to the cart: ${await this.products
+            .nth(i)
+            .locator("b")
+            .textContent()}`
+        ); // just for debugging purpose
         //add to the cart
         await this.products.nth(i).locator("text = Add To Cart").click(); //Locator is added here instead of keeping inside the constructor because we are 'Locator chaining'
         break;

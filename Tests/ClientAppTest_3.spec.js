@@ -9,7 +9,7 @@ const { test, expect } = require("@playwright/test");
 const { POManager } = require("../Pages/POManager");
 const { customTest } = require("../TestData/ClientAppTest_3_TestBase");
 
-customTest.only(`Client App Login`, async ({ page, testDataForOrder }) => {
+customTest(`Client App Login`, async ({ page, testDataForOrder }) => {
   //await page.pause();
   const poManager = new POManager(page);
   const loginPage = poManager.getLoginPage();

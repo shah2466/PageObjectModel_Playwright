@@ -12,7 +12,7 @@ const dataSet = JSON.parse(
  * Above, dataSet does not have curly braces around it because it is not a named import. Meaning, the exporting file has not explicitly named the export
  */
 
-test("Client App Login", async ({ page }) => {
+test.only("Client App Login", async ({ page }) => {
   //await page.pause();
   const poManager = new POManager(page);
   const loginPage = poManager.getLoginPage();
