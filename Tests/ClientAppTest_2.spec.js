@@ -12,13 +12,13 @@ const dataSet = JSON.parse(
 );
 
 for (const data of dataSet) {
-  test(`Client App Login for ${data.productName}`, async ({ page }) => {
+  test.only(`Client App Login for ${data.productName}`, async ({ page }) => {
     //await page.pause();
     const poManager = new POManager(page);
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(data.username, data.password);
-    await page.waitForLoadState("networkidle");
+    //await page.waitForLoadState("networkidle");
 
     /**start of Dashboard page */
     const dashboard_page = poManager.getDashboardPage();

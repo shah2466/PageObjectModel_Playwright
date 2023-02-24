@@ -12,13 +12,13 @@ const dataSet = JSON.parse(
  * Above, dataSet does not have curly braces around it because it is not a named import. Meaning, the exporting file has not explicitly named the export
  */
 
-test.only("Client App Login", async ({ page }) => {
+test("Client App Login", async ({ page }) => {
   //await page.pause();
   const poManager = new POManager(page);
   const loginPage = poManager.getLoginPage();
   await loginPage.goTo();
   await loginPage.validLogin(dataSet.username, dataSet.password);
-  await page.waitForLoadState("networkidle");
+  //await page.waitForLoadState("networkidle");
 
   // Expect a title "to contain" a substring.
   //await expect(page).toHaveTitle(/Shop/); //regular expression
@@ -26,6 +26,7 @@ test.only("Client App Login", async ({ page }) => {
 
   /**start of Dashboard page */
   const dashboard_page = poManager.getDashboardPage();
+
   await dashboard_page.searchProductAddToCart(dataSet.productName);
   await dashboard_page.navigateToCart();
   /**start of cart page */

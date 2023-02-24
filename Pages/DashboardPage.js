@@ -12,7 +12,8 @@ class DashboardPage {
    *  locator.nth() returns locator to the n-th matching element. It's zero based, nth(0) selects the first element.
    */
   async searchProductAddToCart(productName) {
-    const titles = await this.productText.allTextContents();
+    //await this.page.waitForLoadState("networkidle"); //wait until all network calls are made for all products to be loaded on the page.
+    const titles = await this.productText.allTextContents(); //allTextContents() does not have auto wait implemented for it by playwright. WE need custom wait like above step.
     console.log(titles);
     const count = await this.products.count();
     for (let i = 0; i < count; ++i) {
