@@ -12,23 +12,27 @@ const dataSet = JSON.parse(
 );
 
 for (const data of dataSet) {
-  test.only(`Client App Login for ${data.productName}`, async ({ page }) => {
-    //await page.pause();
+  test(`@Parameterized_test_2 Client App Login for ${data.productName}`, async ({
+    page,
+  }) => {
+    //await page.pause(); //to open the playwright inspector. Starts debugging mode.
     const poManager = new POManager(page);
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(data.username, data.password);
-    //await page.waitForLoadState("networkidle");
 
     /**start of Dashboard page */
+
     const dashboard_page = poManager.getDashboardPage();
     await dashboard_page.searchProductAddToCart(data.productName);
     await dashboard_page.navigateToCart();
+
     /**start of cart page */
     console.log(await page.title());
     const cart_page = poManager.getCartPage();
     cart_page.VerifyProductIsDisplayed(data.productName);
     await cart_page.clickOnCheckOutBtn();
+
     /**start of Place Order page */
     const placeOrder_page = poManager.getPlaceOrderPage();
     await placeOrder_page.clickOnPlaceOrderBtn();

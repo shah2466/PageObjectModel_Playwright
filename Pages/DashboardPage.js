@@ -12,20 +12,17 @@ class DashboardPage {
    *  locator.nth() returns locator to the n-th matching element. It's zero based, nth(0) selects the first element.
    */
   async searchProductAddToCart(productName) {
-    //await this.page.waitForLoadState("networkidle"); //wait until all network calls are made for all products to be loaded on the page.
-    const titles = await this.productText.allTextContents(); //allTextContents() does not have auto wait implemented for it by playwright. WE need custom wait like above step.
+    //allTextContents() does not have auto wait implemented for it by playwright. We need to implement custom wait using either of the following for combination for them.
+    //await this.page.waitForLoadState("networkidle"); //wait for all network calls to be made.
+    //await this.page.waitForLoadState("domcontentloaded"); //wait for the page to be loaded
+    await this.page.waitForSelector("text = Add To Cart"); //to make sure the items are loaded on the page. //page.waitForSelector("yourselector1", "yourselector2");
+    const titles = await this.productText.allTextContents();
     console.log(titles);
     const count = await this.products.count();
     for (let i = 0; i < count; ++i) {
       if (
         (await this.products.nth(i).locator("b").textContent()) === productName
       ) {
-        console.log(
-          `Adding this item to the cart: ${await this.products
-            .nth(i)
-            .locator("b")
-            .textContent()}`
-        ); // just for debugging purpose
         //add to the cart
         await this.products.nth(i).locator("text = Add To Cart").click(); //Locator is added here instead of keeping inside the constructor because we are 'Locator chaining'
         break;

@@ -13,15 +13,14 @@ class CartPage {
 
   /**Dynamically create a locator based on the productName that will be passed inside test function */
 
-  getProductLocator(productName) {
+  async getProductLocator(productName) {
     return this.page.locator("h3:has-text('" + productName + "')");
   }
 
   /**is the product above visible based on the locator */
   async VerifyProductIsDisplayed(productName) {
     await this.cartProducts.waitFor(); //to make sure products are visible before we verify isVisible
-    const bool = await this.getProductLocator(productName).isVisible();
-    console.log(bool);
+    const bool = await (await this.getProductLocator(productName)).isVisible();
     expect(bool).toBeTruthy();
   }
 }
